@@ -1,0 +1,41 @@
+***	An array has a place where it's stored, and it starts at what's called its base address.
+	That's because we want a bunch of elements, so we've to have a place to start, and then it runs
+	contiguously through as much memory as is needed, and that gets allocated automatically in this case
+	by the compiler. So there're some things we don't know explicitely because the compiler is doing it 
+	for us.
+
+	A simple data type like an integer, for example: 
+		int a;
+	it means create a variable in memory, and the memory needs to be as many bytes as to store appropriately
+	the values that are allowed for an integer (4 bytes = 32 bits in most actual PCs). And if we say something like:
+		a = 3;
+	that means that in this 4 bytes we put in an appropiate representation binary 3 and is going to be in some location
+	in memory. Each of the cells in a PC memory has a location which is basically a number, for example:
+		a = 3; the 3 will be stored in location(address) 7006 in 4 byte set of memory cells.
+
+	So every variable we create is like a mailbox, has a name, an address(a number), and then inside there's
+	something(a value) which is represented as a binary set of digits and interpreted as a particula data-type.
+
+	For an array, is similar but every value in the array represents 1 variable. For example:
+		int data[4] = {2, 4, 6, 8};
+	this represents 4 integer variables. if the compiler assign them to the address 7006, then:
+		data[0] = [2] is put in the address 7006
+		data[1] = [4] is put in the address 7010 (4 bytes later)
+		data[2] = [6] is put in the address 7014 (4 bytes later)
+		data[3] = [8] is put in the address 7018 (4 bytes later)
+	So we think this array as having 4 individual cells(address) appropiate to that integer datatype(4 bytes).
+
+	array address calculation = base address + (index * required size in bytes to store that individual datatype).  
+	So if the base address is 7006, then the address of data[2] whill be 7006 + (2 * 4 bytes) = 7014
+
+*** Pointer variables are derived types:
+		int variable = 5;
+		int *ptr = &variable;
+	a pointer must have a type, in this case int, so it'll point to the address of memory where a pure integer variable
+	is stored(like 7006 in the previous example).
+	Now ptr is this value 7006, and what's stored in that area of memory is an int variable whose value is 5. We can
+	have as an expression ptr or *ptr and those two are different variables:
+		printing ptr will get some address (like 7006) (print(ptr) -> 7006)
+		dereferencing ptr (using *ptr) and printing it will get the value 5 (print(*ptr) -> 5)
+	-The base type of a pointer affects how it looks at memory?
+		Yes. pointer to int and pointer to double are different and this difference can affect both how much memory is pointed at – for example an int may be in 4 bytes and a double may be in 8 bytes;  and interpretation -namely how the bits are interpreted.

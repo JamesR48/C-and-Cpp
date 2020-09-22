@@ -1,0 +1,33 @@
+Trees has a root, branches and leaves.
+
+In a binary tree, the root is the 1st node, and it have two descendants (left and right) which
+are its 2 branches (edges connecting nodes). It can have internal nodes that can divide in up to
+2 branches, and then at the end of the tree we have the leaf nodes, which doesn't have any branches.
+
+[Note: Generally trees may have N branches, but in this case, binary trees have just 2 as the name implies]
+
+Trees divides in levels (quantity of node rows from the root). 
+
+Trees can be "complete" if every node has 2 descendants (branches).
+
+For example, a complete tree with 4 levels have 1 (root node) + 2 (internal nodes) + 4 (leaf nodes) = 7 nodes in total
+				root
+			   /    \
+		internal     internal
+		 /   \	       /   \
+      leaf   leaf   leaf   leaf
+
+So for a complete tree, in every level you have 2^level number of nodes (e.g: level 1 is 2^1=2 nodes, level 3 is 2^3=8 nodes)
+
+So a tree can be modeled as a struct, with each left and right descendants as ponters, and each node will be a data value.
+The data can be sorted (retreiving data in an efficient matter) ordered unsorted.
+e.g of sorted tree:
+6<10, 4<6, 8>6 | 18>10, 15<18, 21>18
+		 10
+	    /   \
+       6    18
+      / \   /  \
+	 4   8 15  21
+
+Such ordered trees they have a log2(n) property that many of the operations on that tree for n data elements can be donde in
+log(n) so they're highly efficient for sorting information

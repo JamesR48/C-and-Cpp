@@ -1,0 +1,18 @@
+Native Types:
+	-For the C language, they're int, float, double, char, short, long, pointer...
+Userd Defined Type:
+	Most newer languages have very powerful type extension abilities. For example chemist or biologists
+	need more specific types to work with. There're ways to do type extension with C, one of them are "enumerators".
+	* You want to have a type cause it allows the compiler to do what's called type checking. Type checking at the
+	compiler level is a way to make debugging easier. C is a weak type language (kind of like Python) in comparison to
+	something like Java, which is very strong type.
+	-Enumeration Type example:
+		*enum day{ Sun, Mon, Tues, Weds, Thurs, Fri, Sat}; (this is an enumerator type with "day" as its tag name, and
+			its values are those days of the week, each value is given an index number by default, starting from 0, so
+			they are integer constants in reality)
+		*Now we can do something like:
+			enum day today = Fri; (we have a variable "today" of type "day", which is initialized with "Fri" thats
+				number 5 in the enum day type)
+	-Enumeration types in C are a restricted form of integer type.
+	-"typedef" can be used to associate an "enum type" with any other plain name we want, for example:
+		typedef enum day day; (now you can create a variable of type "day" without writing "enum day" previously)

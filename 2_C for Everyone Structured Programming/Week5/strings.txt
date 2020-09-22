@@ -1,0 +1,19 @@
+In C, string isn't a data type, it's an array of chars
+
+A string like "ab" (denoted by the string constant with the double "") is really, in its internal
+representation, the character a (char) typically placed in 1 byte, the character b (char) again in 1 byte,
+and a 'sentinel' character which is a true 0 and can be also written as '\0' (with single '') and that's 
+because if we have '0' (with single '' and without the \) that wouldn't be a true 0, that would be the ASCII
+value of the character 0.
+The sentinel is called like that because when doing string processing we generally put in a loop and it searches
+for the end of the string, so it's a sentinel because is a way of finding the end of the string.
+
+So for example if we've something like: 
+	char str[] = "abc";
+That means:
+	[a][b][c][\0]
+Because it's really a char array of 4 elements because there's always the sentinel '\0', so:
+	str[0] has the character 'a'
+	str[1] has the character 'b'
+	str[2] has the character 'c'
+	str[3] has the character '\0'

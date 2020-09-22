@@ -1,0 +1,42 @@
+C supports "call by value", which is where arguments are passed in, possibly variables from the calling environment,
+inside the routine (function) they're manipulated but when that function exits, those variables are unchanged.
+What is manipulated in "call by value" is some local instance of where the value argument is initialized.
+
+C allows to 'simulate' "call by reference", the way to do it is dereferencing addresses (an address varaible
+when preface by a *, accesses the contents at that address). To get the variable we use the & operator.
+	* - dereference
+	& - address of 
+
+For example when using scanf(), we do something like:
+	int intVariable = 0;
+	scanf("%d", &intVariable);
+So we take the address of intVariable, and inside there the manipulation occurs, so whatever intVariable's value
+on entry was, it can be changed by not manipulating address of size ("call by value"), but by manipulating the
+contents at that address ("call by reference").
+
+Normally parameters are "called by value" but we can pass in an address(a pointer). We use this mechanism to
+achieve "call by reference", and use it to change values (like with scanf()) in the calling environment.
+E.g:
+	We create a function called swap(a,b) that will swap values between variable "a" and variable "b"
+	Say a,b are int. a = 2, b = 5. Then, we want b to become 2 (b = 2) and a to become 5 (a = 5)
+	- void swap(int i, int j)
+		{
+			int temp = i;
+			i = j;
+			j = temp;
+		} // this won't work
+
+	- void swap(int *i, int *j)
+			{
+				int temp = *i;
+				*i = *j;
+				*j = temp;
+			} //this will work
+
+For calling by reference:
+	- Declare parameters as pointers
+	- Use dereferenced pointers in the function's body
+	- Then pass in the address of the variables we want (in this case: swap(&a, &b);)
+
+When using a reference declaration in a function header to simulate call-by-reference, it means the referenced variable in the calling environment can be changed. This is what scanf() does.
+	

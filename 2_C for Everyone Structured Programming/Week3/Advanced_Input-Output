@@ -1,0 +1,14 @@
+Basic notions:
+	printf -> goes to the screen. Uses stdout (standard out)
+	scanf -> goes to the keyboard. Uses stdin (standard in)
+
+File Redirection (uses a feature of the operating system) ->
+	-in the case of printf, instead of going to the screen, the output goes to a file:
+		code.exe > file (note the greater than sign >)
+	-in this other case, the file provides input into scanf:
+		code.exe < file (note the less than sign <)
+
+More advanced:
+	printf always has a control string (a quoted string " ") and that gives instructions,
+	either verbatim like "hello world", or things with % that do conversion of things that
+	occur in a list of comma (,) separated arguments. ("%%"" prints a percentage %)

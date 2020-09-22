@@ -1,0 +1,83 @@
+/*
+	Peer-graded Assignment: Week 2 Assignment: Using struct
+
+	Option 2 (Natural or Social Science Focus)
+		Write a struct that has a member that is the name of a business department: 
+		HR, Sales, Research, Software, and Executive (use enums for the 4 departments).
+		A second member that is an annual salary as an int. A third member that is a social
+		security number(unsigned). Generate 10 employees with different social security numbers.
+		Invent a salary generator for each department (use some base salary for the department and
+		add in a randomly generated offset).  Print out the 10 employees and their values to the 
+		screen-one line at a time.
+
+	Sept. 16, 2020
+	James M. Romero Q.
+*/
+
+#include <stdio.h> //Input and Output functions
+#include <stdlib.h> //for using the rand() function
+#include <time.h> //for manipulating date and time
+
+typedef enum department{HR, Sale, Research, Software, Executive} department; //enum of business departments
+
+//employee information struct
+typedef struct employee
+{
+	department dept; //contains the enum indicating which department an employee belongs to
+	int annual_salary; //the annual salary of an employee as an integer
+	unsigned int social_security;	//the social security number of an employee as an unsigned (non negative) integer
+} employee; 
+
+//Function for generating a random salary for an employee, given an employee struct pointer
+void Salary_Generator(employee *emp)
+{
+	int base_salary; //The base salary will be an int based in the employee department
+
+	//We get the employee department (enum. 5 values) as a switch statement expression
+	switch(emp -> dept)
+	{
+		case 0: base_salary = 30000; break; //HR department gets 30000 USD annually
+		case 1: base_salary = 40000; break; //Sale department gets 40000 USD annually
+		case 2: base_salary = 50000; break; //Research department gets 50000 USD annually
+		case 3: base_salary = 60000; break; //Software department gets 60000 USD annually
+		default: base_salary = 70000; break; //Executive department gets 70000 USD annually
+	}
+
+	//The annual salary is calculated based on the department base salary + a random offset between 0 and 499 (500 non inclusive)
+	emp -> annual_salary = base_salary + (rand()%500);
+}
+
+//Function for generating random employee data, given an employee struct pointer
+void Employee_Generator(employee *emp)
+{
+	emp->dept = rand()%5; //The department is a random number between 0 and 4 (5 non inclusive)
+	
+	/*
+	Social security is a random number between 100000000 and 999999999
+	The equation '(rand() % (maximum_number + 1 - minimum_number)) + minimum_number'
+	Means we want to generate a random number in a specific range, in this case [100000000, 900000000] inclusive
+	*/
+	emp->social_security = (rand() % (999999999 + 1 - 100000000)) + 100000000;
+
+	Salary_Generator(emp);//We pass the pointer to the salary generator function to calculate the annual salary of the employee
+}
+
+int main()
+{
+	employee employees[10]; //We create an array of employee structs with 10 values 
+
+	// Use current time of the computer as seed for random generator
+    srand(time(0));
+
+	for(int idx = 0; idx < 10; idx++) //for loop from 0 to 9 since those are the indices of the employees array
+	{
+		
+		Employee_Generator(&employees[idx]); //We generate an employee for every value in the array of structs
+
+		//Finally print all the employees generated line by
+		printf(" Employee number %d from department %d earns $%d USD annually and has the social security number %u \n",
+		 						idx, employees[idx].dept, employees[idx].annual_salary, employees[idx].social_security);
+	}
+
+	return 0;
+}

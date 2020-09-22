@@ -1,0 +1,23 @@
+* Preprocessor in C does important things like link-in standard files and macro expansion.
+* In modern languages, those characteristics are frequently just components of the overall
+	compiler, and there's nothing to do with a preprocessor.
+
+So, for example in an expression like:
+	#include <stdio.h>
+The # is a special character that announces that there's a preprocessor command.
+#include <"something"> means "go look for it in a standard place and get one of the C
+standard header files"
+
+Another example is the "#define" which is a macro facility (should avoid them):
+	#define PI 3.14159
+	#define EOF (-1) //EOF - End Of File
+	#define EQ == //now when you use EQ, it will be the operator ==.Eg: if(1 EQ 1){DO};
+	#define SQ(*) ((x)*(x)) //You can define macros with parameters and operations combined
+
+It can be dangerous because the macro facility doesn't have the equivalent of compilers
+doing things like type checking or making sure that expressions are legal, so you may
+do some stuff that causes a later error that's not going to be easy to catch.
+	
+Using the compiler as: gcc -E file.c
+The flag "-E" means "expand macros acting on the file", so it'll not compile the
+executable but spit out C code after the preprocessor.

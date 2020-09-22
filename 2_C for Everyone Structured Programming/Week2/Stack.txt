@@ -1,0 +1,23 @@
+Stack: Pila
+
+Stacks are ADTs (Abstract Data Types - aka User-Defined Types)
+
+They're LIFO (Last In, First Out) type, also called canonical non-trivial data structure.
+The main actions you can do to this data structure are push (inserting) and pop (extracting).
+Other actions include looking at the top, seeing if the stack is empty/full, and resetting the stack.
+
+Implementing stacks in C:
+	typedef struct stack
+	{
+		char s[MAX_LEN];
+		int top;
+	} stack;
+So the underlying representation is an array.
+
+For performing a push:
+	//We access the stack through a pointer since the stack is going to be changed
+	void push(char c, stack *stk)
+	{
+		stk -> top++; //Add one to the current top since we are adding a new element to the stack
+		stk -> s[stk -> top] = c; //stick in that current top the character "c" we want to add
+	}

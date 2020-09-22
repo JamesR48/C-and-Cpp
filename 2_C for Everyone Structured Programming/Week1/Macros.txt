@@ -1,0 +1,21 @@
+Macros are piece of code found by using #define, and that #define will be
+define of what's called an "assert".
+
+Some useful macros for preprocessing are:
+	-character preprocessing (char) and strings (char*)
+		#define getchar() getc(stdin) //stdin is the name assigned to input which generally will start by being the keyboard
+			//this line will get a character from the keyboard
+			//this is a macro in stdio.h
+
+		#define putchar(c) putc((c), stdout) //put a character into standard out(predefined to be the user screen)
+
+A very important library is assert.h
+	#include <assert.h>
+These asserts can be turned on and off, and also can be turned on and off with the flag NDEBUG
+The way they work is, you're going to assert alert as an expression, typically should be a sort of logical, and if
+whatever the expression is true, you keep running (means this is what you expected at that point in the program), but,
+if for some reason it isn't what is expected then it calls an abort which isn't an appropiate message.
+	assert(expression)
+		if true -> keep running
+		if false -> call abort
+Asserts can be injected to test runtime code, and they can be used to prove the correctness of a program.

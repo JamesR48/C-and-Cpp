@@ -1,0 +1,17 @@
+Example array:
+	int data[100];
+	ordered like data[0], data[1], data[2],...data[99] (data[n-1])
+
+-In some sense, data itself is an address in memory, so data[0] means the zeroth element, the first element you'll use.
+-the brackets with an index(like data[index]) perform an address computation that starts on wherever in memory we've data.
+-a normal cell(like int variable) might be stuck in memory cell 2004 or something like that, and that's what it refers to.
+-here we've 2 parts in the memory calculation and it's important to understand that this is a way to get what we call an address
+
+Arrays are useful because most processing is mostly about storing, retrieving and processing very large datasets, and just one
+statement can handle as much data as we have available to us.
+
+initializing an array like int arr[1000] = {0}; means all 1000 elements well be equal to 0.
+
+unlike many programming languages an array name in C is just a pointer to a base address and there is no way to know its size.
+So when passing in an array into a function foobar() for processing – such as averaging a number of grades You normally check
+that you also pass in the size of the array.

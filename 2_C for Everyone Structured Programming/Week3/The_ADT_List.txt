@@ -1,0 +1,98 @@
+Lists are "self-referential types", to add an element for example is to add an element on the 
+front of a list, so the definition contains itself as part of the definition (kind of recursive).
+
+Lists have heads, which is a pointer that go through every element ultimately pointing to the end
+of the list, a tail (a sentinel, defined with '0' or 'null').
+
+An element is some kind of data type and then an arrow to the next element (in a single linked list).
+[There're also double linked list which allows to go backwards]
+
+example of single linked list:
+	typedef struct list //this will be each internal element
+	{
+		int data;
+		struct list *next;
+	} list;
+
+	list *head;
+	list *tail = 0; //or null
+
+creating a list requires using "malloc(size)", which is a special routine found in <stdlib.h> and goes to
+what's called the "heap", which is a pile storage available to C routine which is dynamic (can be used anytime
+in the course of the program). When we go to malloc and ask for a particular size "malloc(size)" like
+malloc(four) it would be 4 bytes, 4 bytes is a word...so saying "malloc(size)" returns a pointer. E.g:
+	head = malloc(sizeof(list)); //malloc return an address where we've gotten size of list (number of elements)
+
+sizeof() is a special keyword that returns an unsigned long in number of bytes whatever this object is and that allows
+us to construct such an object (dynamically allocated space). You should return dynamically allocated space when it's
+not longer useful (it'll return itself automatically at the end of the program, but you should do it manually).
+free() is a routine that allows the pointer to amount of storage to be returned to the stack for reuse.
+
+List operations include:
+*Count - tell us how many elements are in the list
+	* Works by navigating through a list and each time through we'll add one as we go along until the end (null link sentinel)
+	  recursive E.g:
+	if(h==null) //base case
+	{
+		return 0;
+	}
+	else
+	{
+		return(1+count(h->next));	
+	}
+
+*concatenate - take 2 lists and link them together
+	* there're 2 lists, h1 and h2, h1 is non empty and we're concatenating h1 to h2, meaning h1 is going to chain
+	  along until it gets to its null pointer, and rather than go off to null which is the end of list 1, we're
+	  going to instead link it up to what was h2, that's how we'll concatenate list 1 to 2
+	  recursive e.g:
+	void concat(list *h1, list *h2)
+	{
+		assert(h1!=null); //throw error if h1 is null
+		if(h1->next == null) //recursively go through h1 until null, then link it to h2
+		{
+			h1->next = h2;
+		}
+		else
+		{
+			concat(h1->next, h2);
+		}
+	}
+	* So h1 in that form of concatenation must be pointed at a non empty list. If h1 is indeed empty, you can
+	  just report h2 as the beginning of the discarded list. So test on h1 being empty, if true just return
+	  the 2nd list:
+	void concat(list *h1, list *h2)
+	{
+		if(h1!=null)
+		{
+			if(h1->next == null) //recursively go through h1 until null, then link it to h2
+			{
+				h1->next = h2;
+			}
+			else
+			{
+				concat(h1->next, h2);
+			}
+		}
+		else
+		{
+			return h2;
+		}
+	}
+	* If list h1 has n elements and list h2 has m elements, concatenation takes approximately proportional to list lengths
+	  n operations, since you've to find the end of the 1st list – but then simply tie it to head of 2nd list.
+
+*insert - put an element into a list
+	* You'll have a particular element that want to insert in a particular position (between p1 and p2) and
+	  when we find p1 and its adjacent element p2, we're going to take the element out by q and shove it in
+	  the middle (simpler operation compared to something equivalent in an array)
+	  e.g:
+	 			// first,    last,    insert
+	void insert(list *p1, list *p2, list *q)
+	{
+		assert(p1->next == p2);
+		p1->next = q;
+		q->next = p2;
+	}
+
+*delete - remove an element from a list

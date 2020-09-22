@@ -1,0 +1,91 @@
+Functions:
+	-Should be able to do 1 thing well!.
+	-Functions are like paragraphs, should stay within 1 page of work, so they're easy to understand and to test.
+	-Functions are units that you can manage and test effectively.
+	-If the return statement has an X type expression but the function is of other type, then there's an explicit conversion
+	 like when you do (double x = 2) the 2 is an int but since x is a double the 2 will be converted to 2.0.
+	-Conversion rules can be messy and complicated and generally want to avoid conversions.
+
+Function prototype/declaration:
+	-A function definition is basically mostly done before the main()
+		
+		void some_function()
+		{
+			return;
+		}
+
+		int main()
+		{
+			some_function();
+			return 0;
+		}
+
+	-Prototypes allows a function declaration to precede a definition (can be later in the code or in another file)
+		
+		int function_prototype(int); //function prototype or declaration
+
+		int main()
+		{
+			int x = 1;
+			function_prototype(x);
+			return 0;
+		}
+
+		int function_prototype(int x) //function definition
+		{
+			return (x += 1);
+		}
+
+	-In divide and conquer style, an standard program we would package it, divide and conquer, write our individual routines to
+	 clear them before you use them and then have their definitions.
+
+	 	#include <stdio.h>
+
+	 	int integer_addition(int, int); // 1) we think about what will the function do and which parameters it will get
+
+	 	int main()
+	 	{
+	 		int valueX = 1, valueY = 2;
+	 		integer_addition(valueX, valueY); // 2) we use the function in our code as we wish
+	 		return 0;
+	 	}
+
+	 	int integer_addition(int x, int y) // 3) given (1) and (2) we define our function to do what we planned
+	 	{
+	 		return(x+y);
+	 	}
+
+Scope Rules:
+	-They involves declarations. Declarations typically occur at the head of blocks(nested, parallel...).
+	 Inside the blocks we've nomenclature, identifier names(functions or variables).
+	-What we've to know about them is, when they're available, what their lifetime is.
+	E.G.
+		int main()
+		{ //here starts the block
+
+			int variable = 5; //declaration of variable int, initializing to 5
+			//Now its lifetime begins. So it exists and we can use it throughout this code
+			.
+			.
+			.
+			if(variable==5)
+			{ //if we enter an inner block, like this if statement
+				int varPlus2 = variable+2 //we could declare further variables
+				printf("variable %d and varPlus2 %d", variable, varPlus2); //we could also print both
+			}
+			//but if we exit that inner block(if statement)
+			printf("variable is %d", variable); //the lifetime of varPlus2 goes away, it disappears
+
+		} //here ends the block
+
+	-Inner blocks HIDES outer blocks. The preference for a reused name is in whatever is most local/inner:
+		int x = 3; //if we declare something with a given name, initializated with a given value
+		{ //and then we enter an inner block
+			int x = 5; //we could declare another thing with the same exact name, initializated with a different value
+			printf("%d", x); //if we use that new thing, we'll see that the value it'll takes is the value of the inner block
+			//the int x = 3; of the outer block is ignored inside this block since here there's also an int x with value 5
+		}
+
+	-When a set of variables is declared, it's put on something called "stack", which is the internal way that the compiler
+	 manages storage of variables(other way is "heap")
+	-Stack Trace is is a list of the method calls that the application was in the middle of when an Exception was thrown.

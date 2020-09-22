@@ -1,0 +1,38 @@
+ADTs (Abstract Data Types) are User-Defined Types (like enums)
+
+Structs can have components inside that can be from different types.
+Structs start with the keyword "struct", followed by the struct's name, and inside {}
+goes a list of comma "," separated list of variables/constants. e.g:
+	struct card{
+		int pips;
+		char suit;
+	} deck[52]; //this means that we'll have an array of type card which contains 52 cards
+
+We can also use the keyword "typedef" to simplify the declaration. e.g:
+	typedef struct{
+	float re; //real
+	float im; //imaginary
+	} complex; //we create the struct complex
+	//because of "typedef", we can declare variables/arrays of type complex without saying "struct complex"
+	complex a, b, c[10]; 
+
+To access struct members we can use 2 different operators:
+	- member access using "." (gets the member)
+	- member access using "->" (address of the struct and then gets a member)
+e.g:
+	struct card{
+		int pips;
+		char suit;
+	} c1, c2, c3;
+	//using "." access
+	c1.pips = 3; 
+	c1.suit = 'h'; //so c1 will be the card 3 of hearts
+	//using "->" access
+	struct card *ptr_to_card;
+	ptr_to_card = &c2; //ptr_to_card will be pointing to the address of c2
+	ptr_to_card -> pips = 5;
+	ptr_to_card -> suit = 's'; //so c2 will be the card 5 of spades
+	//we can also combine both methods by dereferencing with "*"
+	// *ptr_to_card will get c2 value by dereferencing since ptr_to_card is the address of c2
+	// so *ptr_to_card.suit will get c2.suit
+
