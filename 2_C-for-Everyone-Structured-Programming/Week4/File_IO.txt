@@ -1,0 +1,20 @@
+Assume you've a data file of homework scores and want an average max - min of
+those scores (the name of the file will be "myhw_scores").
+
+fscanf() is a function from <stdio.h> like scanf() but needs a named file.
+	- fscanf(FILE *fp, "%variableType", &variableName); //FILE pointer to fp, the other 2 arguments of scanf()
+scanf() assumes stdin (keyboard entries) so, in some way scanf also have 3 arguments but the 1st one is default to stdin.
+
+a file could be locked or protected. In order to use one we've to give it a command that specifies if we open the file
+for reading only, reading and writing, append... (you can also combine them).
+There's a function just for that, called fopen(filename, permissions) from <stdio.h>
+	- ifp = fopen("myhw_scores.txt", "r"); //r indicates read only in this case, appropiate for input
+	ifp should be declared as a FILE pointer first:
+	- FILE *ifp;
+	So it would be used in fscanf() like:
+	- fscanf(ifp, "%type", &variable);
+
+There's a limit to how many files the system will allow a particular user to open (around 20 or less), so if
+you wanna be opening and using files, you've to make sure to close them too (at the end of the program they'll
+be closed anyways). fclose(FILE pointer) is the <stdio.h> function just for that. 
+	- fclose(ifp); //When closing a file, a program will no longer have access to it

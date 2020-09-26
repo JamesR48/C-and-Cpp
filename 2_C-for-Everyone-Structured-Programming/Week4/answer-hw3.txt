@@ -1,0 +1,2 @@
+ Average is: 11.750000 
+ Maximum is: 15 

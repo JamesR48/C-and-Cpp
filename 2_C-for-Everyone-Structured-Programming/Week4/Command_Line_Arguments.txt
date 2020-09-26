@@ -1,0 +1,15 @@
+int main() can take 2 special arguments:
+	- int argc (argument count)
+	- char *argv[] (a series of strings that get stored in a vector)
+
+So argc counts how many things you see in the command line (like the name of the executable)
+In the example of the double spacing, we got the name of the double_spaced executable and we processed
+2 file names, the inputFileName must be an existing file in the same folder as the code, and the outputFileName
+can or cannot exist, in case it doesn't exist it'll be created:
+	doubleSpace_CodeExeName inputFileName outputFileName
+			argv[0]				argv[1]		  argv[2]
+So at the end argc will be = to 3
+
+Inside the code we'll open them like:
+	inputFilePtr = fopen(argv[1], "r");
+	outputFilePtr = fopen(argv[2], 'w');
